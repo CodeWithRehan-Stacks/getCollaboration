@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('matches', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role', ['admin', 'creator', 'investor'])->default('creator');
+            $table->foreignId('creator_id')->constrained('creators')->cascadeOnDelete();
+            $table->foreignId('investor_id')->constrained('investors')->cascadeOnDelete();
+            $table->enum('status', ['pending', 'connected', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('matches');
     }
 };

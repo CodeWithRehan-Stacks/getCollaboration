@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('investors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role', ['admin', 'creator', 'investor'])->default('creator');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('business_name');
+            $table->string('website')->nullable();
+            $table->string('business_category');
+            $table->string('sub_category');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('investors');
     }
 };
