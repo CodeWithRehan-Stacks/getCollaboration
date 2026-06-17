@@ -15,6 +15,8 @@ class Creator extends Model
         'niche',
         'sub_niche',
         'social_media_links',
+        'status',
+        'restriction_reason',
     ];
 
     protected $casts = [

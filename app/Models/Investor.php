@@ -15,6 +15,7 @@ class Investor extends Model
         'website',
         'business_category',
         'sub_category',
+        'tier',
     ];
 
     public function user()
